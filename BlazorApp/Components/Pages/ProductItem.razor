@@ -1,0 +1,18 @@
+﻿@using BlazorApp.Models
+
+<div>
+    <p>@Product?.Name</p>
+    <p>@Product?.Description</p>
+    <p>Price: @Product?.Price.ToString("C")</p>
+    <hr/>
+</div>
+
+@code {
+    [Parameter]
+    public Product? Product { get; set; }
+
+    // private decimal CalculatePriceInGrivnas(decimal price)
+    // {
+    //     return price * 0.02; 
+    // }
+}
