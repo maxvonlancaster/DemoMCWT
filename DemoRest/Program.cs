@@ -1,5 +1,9 @@
 using DemoRest.Handlers;
 using DemoRest.Services;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.DependencyInjection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAuthorService, AuthorService>();
 builder.Services.AddSingleton<AddAuthorHandler>();
 builder.Services.AddSingleton<GetAuthorsQueryHandler>();
+builder.Services.AddTransient<ITokenService, TokenService>();
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:5001";
+        options.Audience = "demo-api";
+    });
 
 var app = builder.Build();
 
@@ -26,6 +38,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
