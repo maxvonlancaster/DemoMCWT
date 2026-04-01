@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoGraphQL", "DemoGraphQL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoRest", "DemoRest\DemoRest.csproj", "{327BC325-B795-4CA3-BEA3-A7CAE930A20B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketsDemo", "WebSocketsDemo\WebSocketsDemo.csproj", "{647D1FA0-32F8-49D8-B86E-CED49955C9EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{327BC325-B795-4CA3-BEA3-A7CAE930A20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{327BC325-B795-4CA3-BEA3-A7CAE930A20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{327BC325-B795-4CA3-BEA3-A7CAE930A20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647D1FA0-32F8-49D8-B86E-CED49955C9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647D1FA0-32F8-49D8-B86E-CED49955C9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647D1FA0-32F8-49D8-B86E-CED49955C9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647D1FA0-32F8-49D8-B86E-CED49955C9EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
