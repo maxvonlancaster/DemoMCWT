@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        * {
+            margin-top: 1rem;
+        }
+
+        input, button {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+    <h2>Account Info</h2>
+    <p>Current info: <span id="account-info"></span></p>
+    <form action="https:/localhost:7107/api/Account/update-info" method="POST">
+        <input type="text" name="newInfo" id="new-info" placeholder="New account info">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

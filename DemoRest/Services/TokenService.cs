@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using DemoRest.Models;
 
 namespace DemoRest.Services;
 
@@ -34,5 +35,60 @@ public class TokenService : ITokenService
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    //public string GetToken(string token)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    //public string GetToken(string token, string username)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    //public User GetUser(string username)
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    //public string? ValidateToken(string token)
+    //{
+    //    throw new NotImplementedException();
+    //}
+}
+
+public class TokenValidator : ITokenValidator
+{
+    private readonly IConfiguration _configuration;
+    public TokenValidator(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+    public string? ValidateToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var secretKey = _configuration["Jwt:Key"];
+        var key = Encoding.UTF8.GetBytes(secretKey);
+        try
+        {
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = _configuration["Jwt:Issuer"],
+                ValidAudience = _configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            }, out SecurityToken validatedToken);
+            var jwtToken = (JwtSecurityToken)validatedToken;
+            var username = jwtToken.Claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value;
+            return username;
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

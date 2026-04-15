@@ -4,7 +4,7 @@ namespace DemoRest.Services;
 
 public class AuthorService : IAuthorService
 {
-    private readonly List<Author> _authors;
+    protected readonly List<Author> _authors;
 
     public AuthorService()
     {

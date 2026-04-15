@@ -3,6 +3,7 @@ using DemoRest.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
+using DemoRest.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,8 @@ builder.Services.AddSingleton<IAuthorService, AuthorService>();
 builder.Services.AddSingleton<AddAuthorHandler>();
 builder.Services.AddSingleton<GetAuthorsQueryHandler>();
 builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<DemoRest.Controllers.IUserService, UserService>();
+builder.Services.AddSingleton<ICacheService, CacheService>();
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>

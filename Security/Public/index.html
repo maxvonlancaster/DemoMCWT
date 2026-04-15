@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        * {
+            margin-top: 1rem;
+        }
+
+        input, button {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+    </style>
+    <title>XSS Example</title>
+</head>
+<body>
+    <div id="data-container"></div>
+    <input type="text" id="data-input">
+    <button id="submit-button">Submit</button>
+
+    <script>
+        const dataContainer = document.getElementById('data-container');
+        const dataInput = document.getElementById('data-input');
+        const submitButton = document.getElementById('submit-button');
+
+        submitButton.addEventListener('click', async () => {
+            let data = dataInput.value;
+            await fetch('https:/localhost:7107/api/User', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ newUserData: data })
+            });
+            await loadData();
+        });
+
+        async function loadData() {
+            let response = await fetch('https:/localhost:7107/api/User');
+            let data = await response.json();
+
+            // sanitize the data to prevent XSS
+            dataContainer.innerHTML = data.userData;
+        }
+    </script>
+</body>
+</html >
